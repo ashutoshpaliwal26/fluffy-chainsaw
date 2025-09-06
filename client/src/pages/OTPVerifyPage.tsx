@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Check, Smartphone, ArrowLeft, RefreshCw, Mail } from 'lucide-react';
+import { Check, ArrowLeft, Mail } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { apiClient } from '@/lib/apiClient';

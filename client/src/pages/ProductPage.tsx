@@ -30,8 +30,8 @@ const ProductPage: React.FC = () => {
   const { addItem: addToWishlist, isInWishlist } = useWishlist()
   
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-  const [selectedColor, setSelectedColor] = useState('')
-  const [selectedSize, setSelectedSize] = useState('')
+  const [selectedColor] = useState('')
+  const [selectedSize] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [product, setProducts] = useState<Product | null>(null);
 

@@ -26,14 +26,14 @@ function wishlistReducer(state: WishlistState, action: WishlistAction): Wishlist
   switch (action.type) {
     case 'ADD_ITEM': {
       const product = action.payload
-      const existingItem = state.items.find(item => item.product.id === product.id)
+      const existingItem = state.items.find(item => item.product._id === product._id)
       
       if (existingItem) {
         return state // Item already exists
       }
 
       const newItem: WishlistItem = {
-        id: `wishlist-${product.id}`,
+        id: `wishlist-${product._id}`,
         product,
         addedAt: new Date(),
       }
@@ -45,7 +45,7 @@ function wishlistReducer(state: WishlistState, action: WishlistAction): Wishlist
     }
 
     case 'REMOVE_ITEM': {
-      const newItems = state.items.filter(item => item.product.id !== action.payload)
+      const newItems = state.items.filter(item => item.product._id !== action.payload)
       return {
         items: newItems,
         itemCount: newItems.length,
@@ -96,7 +96,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   }, [state.items])
 
   const addItem = (product: Product) => {
-    const existingItem = state.items.find(item => item.product.id === product.id)
+    const existingItem = state.items.find(item => item.product._id === product._id)
     if (existingItem) {
       toast.error(`${product.name} is already in your wishlist`)
       return
@@ -107,7 +107,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   }
 
   const removeItem = (productId: string) => {
-    const item = state.items.find(item => item.product.id === productId)
+    const item = state.items.find(item => item.product._id === productId)
     dispatch({ type: 'REMOVE_ITEM', payload: productId })
     if (item) {
       toast.success(`${item.product.name} removed from wishlist`)
@@ -120,7 +120,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   }
 
   const isInWishlist = (productId: string) => {
-    return state.items.some(item => item.product.id === productId)
+    return state.items.some(item => item.product._id === productId)
   }
 
   return (

@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Grid, List, SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import ProductCard from '@/components/ui/ProductCard';
 import SearchBar from '@/components/ui/SearchBar';
@@ -16,7 +16,7 @@ const CategoryPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+  const [viewMode] = useState<'grid' | 'list'>('grid')
   const [showFilters, setShowFilters] = useState(false)
   const [selectedBrands, setSelectedBrands] = useState<string[]>([])
   const [selectedColors, setSelectedColors] = useState<string[]>([])
@@ -36,8 +36,8 @@ const CategoryPage: React.FC = () => {
     { value: 'newest', label: 'Newest' },
   ]
 
-  const brands = Array.from(new Set(mockProducts.map(p => p.brand)))
-  const colors = Array.from(new Set(mockProducts.flatMap(p => p.colors || [])))
+  // const brands = Array.from(new Set(mockProducts.map(p => p.brand)))
+  // const colors = Array.from(new Set(mockProducts.flatMap(p => p.colors || [])))
 
   const filteredProducts = useMemo(() => {
     let products = mockProducts
